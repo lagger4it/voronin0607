@@ -14,7 +14,8 @@ jQuery(document).ready(function(){
 
 var date = new Date();
 var IPData = jQuery("input.ipData").val();
-var PData = jQuery("input.pData").val();
+var idPOST = jQuery("input.idPOST").val();
+var namePOST = jQuery("input.nameUser").val();
 
   function myAJAX(){
     /*alert (IPData + ' => ' + date);*/
@@ -23,8 +24,10 @@ var PData = jQuery("input.pData").val();
   	    type: "POST",
   	    data :  { 
           action: 'MyAjaxIP',
-          a : jQuery("input.ipData").val(),
-          b : date
+          a : IPData,
+          b : date,
+          c : idPOST,
+          d : namePOST
         },
   	    success : function(data){
   	        alert(data);

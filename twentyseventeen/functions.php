@@ -615,12 +615,13 @@ if( wp_doing_ajax() ){
 
 
 function get_posts_IP() {
-	if( ! current_user_can('publish_posts') {
-		die('Этот запрос доступен пользователям с правом автора или выше.')
-	}
 	$dateIp = $_POST[a];
 	$TimeIp = $_POST[b];
+	$value = "Yor IP : " . $dateIp . ". Date pick: " . $TimeIp;
+	$post_id = $_POST[c];
+	$namePOST = $_POST[d];
 	echo "Ваши ip: $dateIp Дата: $TimeIp";
+	update_post_meta( $post_id, $namePOST, $value );
 	wp_die();
 }
 
