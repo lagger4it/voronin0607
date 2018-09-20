@@ -5,6 +5,8 @@
  * when users open or close the front page sections section.
  */
 
+ 
+
 (function() {
 	wp.customize.bind( 'ready', function() {
 

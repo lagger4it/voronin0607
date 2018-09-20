@@ -7,8 +7,11 @@
  * @author Ariel Flesler
  * @version 2.1.2
  */
+
+
 ;(function(factory) {
 	'use strict';
+	
 	if (typeof define === 'function' && define.amd) {
 		// AMD
 		define( ['jquery'], factory );

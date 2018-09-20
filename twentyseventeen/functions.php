@@ -433,6 +433,11 @@ function twentyseventeen_scripts() {
 	// Load the html5 shiv.
 	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), '3.7.3' );
 	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
+	wp_enqueue_script( 'myJs', get_theme_file_uri( '/assets/js/myJs.js'),  array( 'jquery' ));
+	wp_localize_script('myJs', 'myAjax', array(
+		'ajaxurl' => admin_url('admin-ajax.php'),
+		)
+	);
 
 	wp_enqueue_script( 'twentyseventeen-skip-link-focus-fix', get_theme_file_uri( '/assets/js/skip-link-focus-fix.js' ), array(), '1.0', true );
 
@@ -584,3 +589,38 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  * SVG icons functions and filters.
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
+
+
+
+// Выводим IP пользователя в WordPress
+function get_the_user_ip() {
+if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+//проверяем ip через интернет
+$ip = $_SERVER['HTTP_CLIENT_IP'];
+} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+//проверяем ip, если пользователь использует прокси
+$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+$ip = $_SERVER['REMOTE_ADDR'];
+}
+return apply_filters( 'wpb_get_ip', $ip );
+}
+add_shortcode('show_ip', 'get_the_user_ip');
+
+if( wp_doing_ajax() ){
+	add_action('wp_ajax_MyAjaxIP', 'get_posts_IP'); 
+}
+
+
+
+
+function get_posts_IP() {
+	if( ! current_user_can('publish_posts') {
+		die('Этот запрос доступен пользователям с правом автора или выше.')
+	}
+	$dateIp = $_POST[a];
+	$TimeIp = $_POST[b];
+	echo "Ваши ip: $dateIp Дата: $TimeIp";
+	wp_die();
+}
+

@@ -24,8 +24,9 @@ get_header(); ?>
 				get_template_part( 'template-parts/post/content', get_post_format() );
 
 					?>
-				<button class="btn_red" style="background-color: red;	padding: 20px 40px; font-size: 22px;">Нажми на меня!</button>
-<?php
+				<button id="testBtnRed" class="btn_red" style="background-color: red;	padding: 20px 40px; font-size: 22px;">Нажми на меня!</button>
+				<input class="ipData" type="hidden" value="<?echo do_shortcode('[show_ip]');?>">
+				<?php  
 				// If comments are open or we have at least one comment, load up the comment template.
 				if ( comments_open() || get_comments_number() ) :
 					comments_template();
